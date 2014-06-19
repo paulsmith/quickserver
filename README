@@ -1,0 +1,14 @@
+Starts a simple file-serving HTTP server in a directory and opens the default
+web browser to the root URL.
+
+Requirements:
+
+ * Python 2.5 or greater
+ * Currently OS X only (uses `open(1)') but easily modifiable to other platforms
+
+Usage:
+
+    $ ./webserver
+    Serving HTTP on 0.0.0.0 port 61209 ...
+    http://0.0.0.0:61209/
+    127.0.0.1 - - [19/Jun/2014 17:21:56] "GET / HTTP/1.1" 200 -

@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# Copyright 2014 Paul Smith
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#    http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Starts a file-serving HTTP server on an OS-assigned port and opens the default
+# web browser to the root URL (i.e., the directory it was started in).
+#
+# Uses `open(1)` which is OS X-only.
+
+f1=/tmp/.$(basename $0).$$.1
+f2=/tmp/.$(basename $0).$$.2
+
+mkfifo $f1 $f2
+
+trap "rm -f $f1 $f2" EXIT
+
+grep --line-buffered -E '^Serving HTTP on .* port .* \.\.\.$' < $f1 | \
+    sed -l -E -e 's|Serving HTTP on (.+) port (.+) \.\.\.|http://\1:\2/|' > $f2 &
+
+{
+    read addr <$f2
+    echo $addr
+    open $addr
+} &
+
+python -u -m SimpleHTTPServer 0 | tee $f1
