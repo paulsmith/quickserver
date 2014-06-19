@@ -1,4 +1,4 @@
-Starts a simple file-serving HTTP server in a directory and opens the default
+Starts a simple file-serving HTTP server in a directory, at an OS-assigned port, and opens the default
 web browser to the root URL.
 
 Requirements:
