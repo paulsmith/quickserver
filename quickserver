@@ -16,8 +16,6 @@
 #
 # Starts a file-serving HTTP server on an OS-assigned port and opens the default
 # web browser to the root URL (i.e., the directory it was started in).
-#
-# Uses `open(1)` which is OS X-only.
 
 f1=/tmp/.$(basename $0).$$.1
 f2=/tmp/.$(basename $0).$$.2
@@ -32,7 +30,7 @@ grep --line-buffered -E '^Serving HTTP on .* port .* \.\.\.$' < $f1 | \
 {
     read addr <$f2
     echo $addr
-    open $addr
+    python -m webbrowser -t $addr
 } &
 
 python -u -m SimpleHTTPServer 0 | tee $f1
