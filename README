@@ -4,7 +4,6 @@ and opens the default web browser to the root URL.
 Requirements:
 
  * Python 2.5 or greater
- * Currently OS X only (uses `open(1)') but easily modifiable to other platforms
 
 Usage:
 
