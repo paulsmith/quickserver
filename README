@@ -3,7 +3,7 @@ and opens the default web browser to the root URL.
 
 Requirements:
 
- * Python 2.5 or greater
+ * Python 2.5 or greater. Works with Py3k.
 
 Usage:
 
@@ -11,3 +11,4 @@ Usage:
     Serving HTTP on 0.0.0.0 port 61209 ...
     http://0.0.0.0:61209/
     127.0.0.1 - - [19/Jun/2014 17:21:56] "GET / HTTP/1.1" 200 -
+    [ YOUR BROWSER MAGICALLY HAS OPENED A NEW TAB DIRECTLY TO THIS URL ]
