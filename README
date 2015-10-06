@@ -22,3 +22,29 @@ Usage:
     127.0.0.1 - - [19/Jun/2014 17:21:56] "GET / HTTP/1.1" 200 -
 
     ~ YOUR BROWSER HAS MAGICALLY OPENED A NEW TAB TO THIS URL REJOICE ~
+
+Installation:
+
+Put the `quickserver` file somewhere in your $PATH, or copy/paste this into your
+.bashrc:
+
+quickserver () {
+    prog=quickserver
+    f1=/tmp/.$prog.$$.1
+    f2=/tmp/.$prog.$$.2
+`    mkfifo $f1 $f2
+    trap "rm -f $f1 $f2" EXIT
+    grep --line-buffered -E '^Serving HTTP on .* port .* \.\.\.$' < $f1 | \
+        sed -l -E -e 's|Serving HTTP on (.+) port (.+) \.\.\.|http://\1:\2/|' > $f2 &
+    {
+        read addr <$f2
+        echo $addr
+        python -m webbrowser -t $addr
+    } &
+    py2=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
+    if [ $py2 -eq 0 ]; then
+        python -u -m http.server 0 | tee $f1
+    else
+        python -u -m SimpleHTTPServer 0 | tee $f1
+    fi
+}
