@@ -17,26 +17,30 @@
 # Starts a file-serving HTTP server on an OS-assigned port and opens the default
 # web browser to the root URL (i.e., the directory it was started in).
 
-prog=quickserver
-f1=/tmp/.$prog.$$.1
-f2=/tmp/.$prog.$$.2
+quickserver () {
+    prog=quickserver
+    f1=/tmp/.$prog.$$.1
+    f2=/tmp/.$prog.$$.2
 
-mkfifo $f1 $f2
+    mkfifo $f1 $f2
 
-trap "rm -f $f1 $f2" EXIT
+    trap "rm -f $f1 $f2" EXIT
 
-grep --line-buffered -E '^Serving HTTP on .* port .* \.\.\.$' < $f1 | \
-    sed -l -E -e 's|Serving HTTP on (.+) port (.+) \.\.\.|http://\1:\2/|' > $f2 &
+    grep --line-buffered -E '^Serving HTTP on .* port .* \.\.\.$' < $f1 | \
+        sed -l -E -e 's|Serving HTTP on (.+) port (.+) \.\.\.|http://\1:\2/|' > $f2 &
 
-{
-    read addr <$f2
-    echo $addr
-    python -m webbrowser -t $addr
-} &
+    {
+        read addr <$f2
+        echo $addr
+        python -m webbrowser -t $addr
+    } &
 
-py2=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
-if [ $py2 -eq 0 ]; then
-    python -u -m http.server 0 | tee $f1
-else
-    python -u -m SimpleHTTPServer 0 | tee $f1
-fi
+    py2=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
+    if [ $py2 -eq 0 ]; then
+        python -u -m http.server 0 | tee $f1
+    else
+        python -u -m SimpleHTTPServer 0 | tee $f1
+    fi
+}
+
+quickserver
