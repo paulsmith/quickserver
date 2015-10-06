@@ -16,7 +16,7 @@ quickserver will open it FOR YOU in your browser thanks you're welcome.
 
 ### Usage
 
-    $ ./quickserver
+    $ quickserver
     Serving HTTP on 0.0.0.0 port 61209 ...
     http://0.0.0.0:61209/
     127.0.0.1 - - [19/Jun/2014 17:21:56] "GET / HTTP/1.1" 200 -
