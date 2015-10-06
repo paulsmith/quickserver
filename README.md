@@ -33,7 +33,7 @@ quickserver () {
     prog=quickserver
     f1=/tmp/.$prog.$$.1
     f2=/tmp/.$prog.$$.2
-`    mkfifo $f1 $f2
+    mkfifo $f1 $f2
     trap "rm -f $f1 $f2" EXIT
     grep --line-buffered -E '^Serving HTTP on .* port .* \.\.\.$' < $f1 | \
         sed -l -E -e 's|Serving HTTP on (.+) port (.+) \.\.\.|http://\1:\2/|' > $f2 &
