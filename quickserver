@@ -17,8 +17,9 @@
 # Starts a file-serving HTTP server on an OS-assigned port and opens the default
 # web browser to the root URL (i.e., the directory it was started in).
 
-f1=/tmp/.$(basename $0).$$.1
-f2=/tmp/.$(basename $0).$$.2
+prog=quickserver
+f1=/tmp/.$prog.$$.1
+f2=/tmp/.$prog.$$.2
 
 mkfifo $f1 $f2
 
