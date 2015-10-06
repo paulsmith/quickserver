@@ -1,5 +1,14 @@
-Starts a simple file-serving HTTP server in a directory, at an OS-assigned port,
-and opens the default web browser to the root URL.
+What is ... ?
+
+You want a simple web server started in a directory for dev or whatever, so you
+could use good ol' `python -m SimpleHTTPServer` but you are busy and you don't
+care about the port but UGH you have to pick a port and maybe it collides with
+the server you're already running on 8000? but OMG picking ports is so hard I
+don't CARE can't someone just do it for me why yes someone can! It's your
+operating system, if you ask to listen a socket on port 0 then it will assign
+one for you from its vast array of 16-bit uints. Oh and then of course you don't
+want to mouse over to the URL and copy/paste it like a peasant so hey,
+quickserver will open it FOR YOU in your browser thanks you're welcome.
 
 Requirements:
 
@@ -11,4 +20,5 @@ Usage:
     Serving HTTP on 0.0.0.0 port 61209 ...
     http://0.0.0.0:61209/
     127.0.0.1 - - [19/Jun/2014 17:21:56] "GET / HTTP/1.1" 200 -
-    [ YOUR BROWSER MAGICALLY HAS OPENED A NEW TAB DIRECTLY TO THIS URL ]
+
+    ~ YOUR BROWSER HAS MAGICALLY OPENED A NEW TAB TO THIS URL REJOICE ~
