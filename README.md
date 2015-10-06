@@ -10,11 +10,11 @@ one for you from its vast array of 16-bit uints. Oh and then of course you don't
 want to mouse over to the URL and copy/paste it like a peasant so hey,
 quickserver will open it FOR YOU in your browser thanks you're welcome.
 
-Requirements:
+### Requirements
 
  * Python 2.5 or greater. Works with Py3k.
 
-Usage:
+### Usage
 
     $ ./quickserver
     Serving HTTP on 0.0.0.0 port 61209 ...
@@ -23,11 +23,12 @@ Usage:
 
     ~ YOUR BROWSER HAS MAGICALLY OPENED A NEW TAB TO THIS URL REJOICE ~
 
-Installation:
+### Installation
 
 Put the `quickserver` file somewhere in your $PATH, or copy/paste this into your
 .bashrc:
 
+``` shell
 quickserver () {
     prog=quickserver
     f1=/tmp/.$prog.$$.1
@@ -47,4 +48,5 @@ quickserver () {
     else
         python -u -m SimpleHTTPServer 0 | tee $f1
     fi
-}
+ }
+ ```
